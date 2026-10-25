@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,1188 +9,3105 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg: #0b0b14;
-  --panel: #141421;
-  --panel2: #1b1a2b;
+  --bg: #0b0914;
+  --panel: #131020;
+  --panel2: #19142a;
+  --border: rgba(203, 181, 255, .13);
+  --text: #f7f3ff;
+  --muted: #a9a1bd;
   --purple: #a78bfa;
+  --purple2: #8b5cf6;
   --pink: #e879f9;
-  --text: #f4f1ff;
-  --muted: #a4a0b8;
-  --border: rgba(255,255,255,.09);
   --green: #6ee7b7;
+  --yellow: #fcd34d;
+  --red: #fda4af;
+  --radius: 20px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
   min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(124, 58, 237, .14), transparent 38%),
+    radial-gradient(ellipse at 100% 100%, rgba(192, 56, 180, .08), transparent 35%),
+    var(--bg);
+  font-family: 'DM Sans', sans-serif;
 }
 
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-
-.layout { display: flex; min-height: 100vh; }
-
-.sidebar {
-  width: 245px;
-  background: #10101b;
-  border-right: 1px solid var(--border);
-  padding: 28px 18px;
-  position: fixed;
-  inset: 0 auto 0 0;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
+button, input, textarea, select {
+  font: inherit;
 }
 
-.logo {
-  font: 700 25px 'Space Grotesk', sans-serif;
-  margin: 4px 8px 9px;
-  letter-spacing: -1px;
-}
-
-.logo span { color: var(--purple); }
-
-.tagline {
-  color: var(--muted);
-  font-size: 11px;
-  margin: 0 8px 36px;
-}
-
-.nav-label {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #79758d;
-  margin: 0 10px 13px;
-}
-
-.nav-item {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 12px 13px;
-  border-radius: 10px;
-  color: var(--muted);
-  margin-bottom: 5px;
+button {
   cursor: pointer;
-  font-size: 13px;
-  transition: .25s;
 }
 
-.nav-item:hover, .nav-item.active {
-  color: white;
-  background: linear-gradient(100deg, #7953c94b, #b17af21a);
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
 }
 
-.nav-item.active { border-left: 2px solid var(--purple); }
-
-.nav-icon { font-size: 17px; width: 22px; }
-
-.sidebar-bottom {
-  margin-top: auto;
-  padding: 17px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--panel);
+.hidden {
+  display: none !important;
 }
 
-.sidebar-bottom p { font-size: 12px; margin-bottom: 8px; }
-.sidebar-bottom small { color: var(--muted); font-size: 11px; line-height: 1.6; }
-
-.main {
-  margin-left: 245px;
-  width: calc(100% - 245px);
-  padding: 30px 36px 50px;
-  max-width: 1800px;
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 31px;
+.muted {
+  color: var(--muted);
 }
 
 .eyebrow {
-  font-size: 10px;
-  letter-spacing: 2px;
   color: var(--purple);
-  margin-bottom: 8px;
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+h1, h2, h3, h4, .brand {
+  font-family: 'Space Grotesk', sans-serif;
+}
 
-h1 { font-size: clamp(24px, 3vw, 34px); letter-spacing: -1px; }
-h2 { font-size: 19px; }
-h3 { font-size: 15px; }
+h1 {
+  font-size: clamp(30px, 4vw, 44px);
+  letter-spacing: -1.5px;
+}
 
-.muted { color: var(--muted); }
-.small { font-size: 12px; }
+h2 {
+  font-size: 25px;
+  letter-spacing: -.6px;
+}
 
-.profile {
+h3 {
+  font-size: 17px;
+}
+
+p {
+  line-height: 1.65;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* AUTHENTICATION */
+
+.auth-screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 60px;
+  max-width: 1250px;
+  margin: auto;
+  padding: 50px;
+}
+
+.auth-showcase {
+  padding: 20px 0;
+}
+
+.brand {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
+  font-size: 23px;
+  font-weight: 700;
+  margin-bottom: 75px;
 }
 
-.avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 13px;
+.brand-mark {
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #a78bfa, #e879f9);
-  color: #1a1026;
-  font-weight: 700;
+  width: 43px;
+  height: 43px;
+  border-radius: 14px;
+  color: white;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed 65%, #e879f9);
+  box-shadow: 0 8px 30px #8b5cf644;
 }
 
-.profile-name { font-size: 13px; font-weight: 600; }
-.profile-role { font-size: 11px; color: var(--muted); margin-top: 4px; }
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 32px;
-  border: 1px solid #a78bfa35;
-  border-radius: 22px;
-  background:
-    radial-gradient(ellipse at 95% 10%, #a78bfa32, transparent 42%),
-    linear-gradient(120deg, #211a39, #181529 65%, #241735);
-  margin-bottom: 25px;
+.brand span {
+  color: var(--purple);
 }
 
-.hero::after {
-  content: "✦";
-  position: absolute;
-  right: 8%;
-  top: 17%;
-  color: #d9c5ff;
-  opacity: .35;
-  font-size: 100px;
-  animation: float 4s ease-in-out infinite;
-  pointer-events: none;
+.auth-showcase h1 {
+  max-width: 570px;
+  margin: 20px 0;
+  line-height: 1.16;
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-12px) rotate(12deg); }
-}
-
-.hero h1 { max-width: 540px; line-height: 1.22; }
-.gradient {
-  background: linear-gradient(90deg, #c4b5fd, #f0abfc);
+.gradient-text {
+  background: linear-gradient(90deg, #c4b5fd, #e879f9, #a5b4fc);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.hero p {
-  color: #c1bbd5;
-  line-height: 1.8;
-  max-width: 530px;
-  font-size: 13px;
-  margin: 14px 0 22px;
+.auth-description {
+  max-width: 480px;
+  color: var(--muted);
+  font-size: 15px;
 }
 
-.btn {
-  border: 0;
-  border-radius: 9px;
-  padding: 11px 16px;
-  font-weight: 600;
-  font-size: 12px;
-  transition: .25s;
-}
-
-.btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
-.btn-primary {
-  background: linear-gradient(100deg, #a78bfa, #d8a4fa);
-  color: #1c1230;
-}
-
-.btn-secondary {
-  background: #ffffff0b;
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-.stats {
+.feature-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 15px;
-  margin-bottom: 28px;
+  gap: 18px;
+  margin-top: 35px;
 }
 
-.stat {
-  background: var(--panel);
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #d9d2e8;
+  font-size: 14px;
+}
+
+.feature-icon {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
   border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 20px;
-  transition: .25s;
+  background: #a78bfa12;
+  border-radius: 12px;
+  font-size: 17px;
 }
 
-.stat:hover { border-color: #a78bfa66; transform: translateY(-3px); }
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  justify-self: center;
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  padding: 35px;
+  background: linear-gradient(145deg, #19142b, #100d1c);
+  box-shadow: 0 25px 100px #0005;
+}
+
+.auth-card h2 {
+  margin: 8px 0;
+}
+
+.auth-sub {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5px;
+  background: #0b0914;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.auth-tab {
+  border: 0;
+  padding: 11px;
+  border-radius: 9px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-tab.active {
+  color: white;
+  background: #29203f;
+  box-shadow: inset 0 0 0 1px #a78bfa25;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 17px;
+}
+
+.field label {
+  font-size: 12px;
+  color: #d7cfe7;
+  font-weight: 600;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  color: white;
+  border: 1px solid var(--border);
+  background: #0c0a15;
+  border-radius: 11px;
+  padding: 13px 14px;
+  outline: none;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #706780;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px #a78bfa12;
+}
+
+.password-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: #0c0a15;
+}
+
+.password-wrap input {
+  border: 0;
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.show-pass {
+  padding: 10px;
+  color: var(--purple);
+  border: 0;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.primary-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 11px;
+  padding: 14px 18px;
+  color: white;
+  background: linear-gradient(100deg, #8b5cf6, #a855f7 55%, #d946ef);
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 9px 28px #8b5cf626;
+  transition: transform .2s, filter .2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.auth-error {
+  min-height: 18px;
+  color: var(--red);
+  font-size: 12px;
+  margin: 0 0 10px;
+}
+
+.auth-note {
+  margin-top: 20px;
+  color: #827992;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* APPLICATION LAYOUT */
+
+.app-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr);
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 245px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 16px;
+  border-right: 1px solid var(--border);
+  background: rgba(14, 11, 23, .95);
+  z-index: 20;
+}
+
+.sidebar .brand {
+  margin: 0 0 40px 7px;
+  font-size: 20px;
+}
+
+.sidebar-label {
+  color: #706780;
+  padding: 0 12px;
+  margin: 12px 0 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.nav-list {
+  display: grid;
+  gap: 7px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  padding: 12px;
+  color: #aaa1bc;
+  background: transparent;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.nav-item:hover {
+  color: white;
+  background: #ffffff07;
+}
+
+.nav-item.active {
+  color: white;
+  border-color: #a78bfa24;
+  background: linear-gradient(100deg, #8b5cf625, #d946ef0a);
+}
+
+.nav-icon {
+  width: 22px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 5px 5px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+.avatar {
+  width: 37px;
+  height: 37px;
+  flex: 0 0 37px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(135deg, #8b5cf6, #d946ef);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.profile-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.profile-text strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.profile-text small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.logout-btn {
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  padding: 7px;
+}
+
+.main-content {
+  grid-column: 2;
+  min-width: 0;
+  padding: 35px clamp(20px, 4vw, 55px) 60px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-pill {
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 30px;
+  padding: 9px 13px;
+  font-size: 11px;
+}
+
+.page {
+  display: none;
+  animation: fadeUp .35s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-heading {
+  margin-bottom: 25px;
+}
+
+.page-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 7px;
+}
+
+.welcome-banner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #a78bfa2c;
+  border-radius: 22px;
+  padding: 30px;
+  margin-bottom: 25px;
+  background:
+    radial-gradient(circle at 90% 20%, #c084fc25, transparent 30%),
+    linear-gradient(110deg, #211637, #171125);
+}
+
+.welcome-banner h2 {
+  margin: 10px 0;
+  font-size: clamp(23px, 3vw, 32px);
+}
+
+.welcome-banner p {
+  max-width: 520px;
+  color: #bcb2d0;
+  font-size: 13px;
+}
+
+.banner-art {
+  font-size: clamp(40px, 7vw, 72px);
+  opacity: .9;
+  filter: drop-shadow(0 0 20px #a78bfa35);
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 30px 0 17px;
+}
+
+.section-title-row h3 {
+  font-size: 17px;
+}
+
+.text-btn {
+  border: 0;
+  background: transparent;
+  color: var(--purple);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.stat-card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: linear-gradient(145deg, #19142a, #110e1d);
+  transition: transform .2s, border-color .2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: #a78bfa45;
+}
 
 .stat-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.stat-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #a78bfa15;
+}
+
+.stat-value {
+  margin: 18px 0 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 18px;
+}
+
+.panel {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #171326, #110e1d);
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.panel-heading h3 {
+  font-size: 15px;
+}
+
+.panel-heading span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.job-list {
+  display: grid;
+  gap: 12px;
+}
+
+.job-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #ffffff0a;
+  border-radius: 13px;
+  background: #ffffff03;
+}
+
+.company-logo {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8b5cf625, #d946ef15);
+  border: 1px solid #a78bfa20;
+  font-size: 17px;
+}
+
+.job-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.job-info h4 {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.job-info p {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  color: #cfc5e5;
+  background: #a78bfa12;
+  border: 1px solid #a78bfa18;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+.tag.green {
+  color: var(--green);
+  background: #6ee7b70c;
+  border-color: #6ee7b71c;
+}
+
+.tag.yellow {
+  color: var(--yellow);
+  background: #fcd34d0c;
+  border-color: #fcd34d1c;
+}
+
+.tag.pink {
+  color: var(--pink);
+}
+
+.small-btn {
+  border: 1px solid #a78bfa35;
+  border-radius: 9px;
+  padding: 8px 11px;
+  color: #d7c9ff;
+  background: #a78bfa0d;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: .2s;
+}
+
+.small-btn:hover {
+  background: #a78bfa20;
+  border-color: #a78bfa65;
+}
+
+.small-btn.solid {
+  color: white;
+  border-color: transparent;
+  background: linear-gradient(100deg, #8b5cf6, #a855f7);
+}
+
+.small-btn.danger {
+  color: var(--red);
+  border-color: #fda4af22;
+  background: #fda4af08;
+}
+
+.activity-list {
+  display: grid;
+  gap: 17px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.activity-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 12px #a78bfa55;
+}
+
+.activity-item strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.activity-item p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.activity-item time {
+  color: #786f8d;
+  font-size: 10px;
+}
+
+/* SEARCH AND FILTERS */
+
+.search-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #131020;
+  color: white;
+  padding: 13px 15px 13px 40px;
+}
+
+.search-box span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+.search-row select {
+  min-width: 140px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: white;
+  background: #131020;
+  padding: 12px;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.job-card {
+  padding: 21px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: linear-gradient(145deg, #19142a, #110e1d);
+  transition: transform .2s, border-color .2s;
+}
+
+.job-card:hover {
+  transform: translateY(-3px);
+  border-color: #a78bfa48;
+}
+
+.job-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.job-card-top .job-info h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.job-card-description {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 17px 0;
+  line-height: 1.7;
+}
+
+.job-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.job-card-footer .salary {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.job-card-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.empty-state {
+  text-align: center;
+  border: 1px dashed #a78bfa30;
+  border-radius: 17px;
+  padding: 45px 20px;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+
+.empty-state .empty-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 12px;
+}
+
+/* APPLICATIONS */
+
+.application-list {
+  display: grid;
+  gap: 13px;
+}
+
+.application-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: #171326;
+}
+
+.application-card .job-info {
+  flex: 1;
+}
+
+.application-status {
+  display: inline-flex;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-applied {
+  color: #c4b5fd;
+  background: #a78bfa17;
+}
+
+.status-interview {
+  color: var(--green);
+  background: #6ee7b715;
+}
+
+.status-rejected {
+  color: var(--red);
+  background: #fda4af12;
+}
+
+/* RESUME ANALYZER */
+
+.resume-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.upload-zone {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 25px;
+  border: 1px dashed #a78bfa65;
+  border-radius: 17px;
+  background: #a78bfa07;
+  transition: .2s;
+}
+
+.upload-zone.dragover {
+  background: #a78bfa18;
+  border-color: var(--purple);
+}
+
+.upload-icon {
+  font-size: 37px;
+  margin-bottom: 14px;
+}
+
+.upload-zone h3 {
+  margin-bottom: 7px;
+}
+
+.upload-zone p {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.upload-zone input {
+  display: none;
+}
+
+.upload-button {
+  display: inline-block;
+  margin-top: 17px;
+  padding: 10px 14px;
+  border: 1px solid #a78bfa35;
+  border-radius: 9px;
+  color: #d7c9ff;
+  background: #a78bfa10;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.resume-textarea {
+  width: 100%;
+  min-height: 210px;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #0c0a15;
+  color: white;
+  padding: 14px;
+  line-height: 1.7;
+  font-size: 12px;
+}
+
+.resume-results {
+  margin-top: 20px;
+}
+
+.score-layout {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.score-circle {
+  width: 112px;
+  height: 112px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 112px;
+  border-radius: 50%;
+  background: conic-gradient(var(--purple) 0deg, #342748 0deg);
+  position: relative;
+}
+
+.score-circle::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  background: #171326;
+}
+
+.score-number {
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.score-number small {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.analysis-content {
+  flex: 1;
+  min-width: 180px;
+}
+
+.analysis-content h3 {
+  margin-bottom: 8px;
+}
+
+.analysis-content p {
   color: var(--muted);
   font-size: 12px;
 }
 
-.stat-icon {
+.analysis-section {
+  margin-top: 20px;
+}
+
+.analysis-section h4 {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.analysis-list {
+  display: grid;
+  gap: 8px;
+}
+
+.analysis-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #c9c0d9;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.analysis-item span {
+  color: var(--green);
+}
+
+.analysis-item.warning span {
+  color: var(--yellow);
+}
+
+/* CAREER STUDIO */
+
+.career-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.career-card {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: linear-gradient(145deg, #19142a, #110e1d);
+}
+
+.career-card-icon {
+  width: 43px;
+  height: 43px;
   display: grid;
   place-items: center;
-  background: #a78bfa1b;
-  width: 35px;
-  height: 35px;
-  border-radius: 10px;
-  color: var(--purple);
-  font-size: 17px;
-}
-
-.stat-value { font: 700 29px 'Space Grotesk', sans-serif; }
-.stat-foot { color: var(--muted); font-size: 10px; margin-top: 7px; }
-
-.content-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
-  gap: 23px;
-  align-items: start;
-}
-
-.section { margin-bottom: 25px; min-width: 0; }
-
-.section-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  border-radius: 13px;
+  background: #a78bfa15;
+  font-size: 20px;
   margin-bottom: 16px;
 }
 
-.section-heading p { margin-top: 6px; font-size: 11px; color: var(--muted); }
-
-.text-btn {
-  border: 0;
-  background: none;
-  color: var(--purple);
-  font-size: 11px;
-  font-weight: 600;
+.career-card h3 {
+  margin-bottom: 7px;
 }
 
-.job-list { display: grid; gap: 12px; }
-
-.job-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 18px;
-  transition: .25s;
-  animation: enter .4s ease both;
-}
-
-@keyframes enter {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.job-card:hover { border-color: #a78bfa65; transform: translateY(-2px); }
-
-.job-top { display: flex; align-items: flex-start; gap: 12px; }
-
-.company-logo {
-  width: 43px;
-  height: 43px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #35274d, #24223d);
-  border: 1px solid #a78bfa2b;
-  border-radius: 12px;
-  font-size: 19px;
-}
-
-.job-info { flex: 1; min-width: 0; }
-.job-info h3 { margin: 3px 0 6px; }
-.company { color: var(--muted); font-size: 11px; }
-
-.match {
-  color: var(--green);
-  background: #6ee7b711;
-  border: 1px solid #6ee7b72c;
-  padding: 6px 8px;
-  border-radius: 8px;
-  white-space: nowrap;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.job-tags { display: flex; gap: 7px; flex-wrap: wrap; margin: 15px 0; }
-
-.tag {
-  background: #ffffff08;
-  border: 1px solid var(--border);
-  padding: 6px 9px;
-  border-radius: 7px;
-  font-size: 10px;
-  color: #c9c3d9;
-}
-
-.job-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  border-top: 1px solid var(--border);
-  padding-top: 13px;
-}
-
-.job-bottom small { color: var(--muted); font-size: 10px; }
-.job-actions { display: flex; gap: 7px; }
-
-.mini-btn {
-  padding: 8px 11px;
-  font-size: 10px;
-  border-radius: 7px;
-  border: 1px solid var(--border);
-  background: #ffffff08;
-  color: white;
-}
-
-.mini-btn.primary { background: #a78bfa; color: #1b1230; border: 0; }
-.mini-btn:disabled { opacity: .6; cursor: default; }
-
-.panel {
-  padding: 21px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+.career-card > p {
+  color: var(--muted);
+  font-size: 12px;
   margin-bottom: 18px;
 }
 
-.panel h2 { margin-bottom: 7px; }
-
-.upload-zone {
-  border: 1px dashed #a78bfa65;
-  background: #a78bfa09;
-  border-radius: 12px;
-  text-align: center;
-  padding: 22px 12px;
-  margin-top: 17px;
-  cursor: pointer;
-  transition: .25s;
-}
-
-.upload-zone:hover { background: #a78bfa17; }
-.upload-icon { font-size: 29px; margin-bottom: 10px; }
-.upload-zone p { font-size: 12px; margin-bottom: 7px; }
-.upload-zone small { font-size: 10px; color: var(--muted); }
-
-input[type="file"] { display: none; }
-
-.field { margin-top: 15px; }
-.field label { display: block; font-size: 11px; margin-bottom: 8px; color: #c9c3d9; }
-
-.field input, .field select, .field textarea, .search-input {
+.career-card textarea {
   width: 100%;
-  background: #0d0d18;
-  border: 1px solid var(--border);
+  min-height: 110px;
+  padding: 12px;
   color: white;
-  padding: 11px 12px;
-  border-radius: 9px;
-  outline: none;
+  background: #0c0a15;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  resize: vertical;
   font-size: 12px;
+  line-height: 1.7;
 }
 
-.field input:focus, .field select:focus, .field textarea:focus, .search-input:focus {
-  border-color: var(--purple);
+.career-card .small-btn {
+  margin-top: 12px;
 }
 
-.field select option { background: #141421; }
-.field textarea { min-height: 100px; resize: vertical; line-height: 1.7; }
+.generated-output {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-top: 15px;
+  padding: 15px;
+  color: #d9d1e8;
+  background: #0c0a15;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  font-size: 12px;
+  line-height: 1.8;
+}
 
-.full { width: 100%; margin-top: 17px; }
+.output-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
 
-.skill-row { margin-top: 20px; }
-.skill-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 8px; }
-.skill-label span:last-child { color: var(--purple); }
+.progress-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 10px;
+  background: #342b45;
+  overflow: hidden;
+  margin-top: 9px;
+}
 
-.progress { height: 6px; border-radius: 10px; background: #ffffff10; overflow: hidden; }
-.progress div {
+.progress-fill {
   height: 100%;
   width: 0;
-  border-radius: 10px;
+  border-radius: inherit;
   background: linear-gradient(90deg, #8b5cf6, #e879f9);
-  transition: width .7s;
+  transition: width .4s;
 }
-
-.activity { display: flex; gap: 11px; margin-top: 20px; }
-.activity-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--purple); margin-top: 5px; flex-shrink: 0; }
-.activity p { font-size: 11px; line-height: 1.6; }
-.activity small { display: block; color: var(--muted); margin-top: 4px; font-size: 10px; }
-
-.search-row { display: flex; gap: 9px; margin-bottom: 15px; }
-.search-row input { flex: 1; min-width: 0; }
-.search-row select { max-width: 145px; }
-
-.page { display: none; }
-.page.active { display: block; animation: enter .3s ease; }
-
-.empty { color: var(--muted); text-align: center; padding: 25px 8px; font-size: 12px; line-height: 1.8; }
 
 .toast {
   position: fixed;
   right: 25px;
   bottom: 25px;
-  background: #252139;
-  border: 1px solid #a78bfa66;
+  z-index: 100;
+  max-width: min(360px, calc(100vw - 35px));
   padding: 14px 18px;
+  color: white;
+  background: #251d38;
+  border: 1px solid #a78bfa40;
   border-radius: 12px;
+  box-shadow: 0 10px 40px #0006;
   font-size: 12px;
-  z-index: 20;
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
-  transition: .3s;
-  max-width: calc(100vw - 40px);
+  transition: .25s;
 }
-.toast.show { opacity: 1; transform: translateY(0); }
 
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: #000b;
-  z-index: 15;
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer-note {
+  margin-top: 30px;
+  color: #726a82;
+  font-size: 10px;
+  text-align: center;
+}
+
+.mobile-menu {
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.modal-backdrop.show { display: flex; }
-.modal {
-  background: #171624;
-  border: 1px solid #a78bfa55;
-  border-radius: 18px;
-  padding: 25px;
-  width: min(520px, 100%);
-  max-height: 85vh;
-  overflow-y: auto;
-}
-.modal-head { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 18px; }
-.close-btn { background: none; border: none; color: white; font-size: 22px; }
-.modal-content { color: #d0c9e1; font-size: 12px; line-height: 1.9; white-space: pre-wrap; }
-
-@media (max-width: 1050px) {
-  .sidebar { width: 205px; }
-  .main { margin-left: 205px; width: calc(100% - 205px); padding: 25px 22px; }
-  .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .content-grid { grid-template-columns: 1fr; }
+  color: white;
+  border: 1px solid var(--border);
+  background: #171326;
+  border-radius: 10px;
+  padding: 9px 12px;
 }
 
-@media (max-width: 650px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    inset: auto 0 0 0;
-    padding: 8px;
-    border-right: 0;
-    border-top: 1px solid var(--border);
-    flex-direction: row;
-    justify-content: space-around;
-    background: #10101bf5;
+@media (max-width: 1100px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .logo, .tagline, .nav-label, .sidebar-bottom { display: none; }
-  .nav-item { flex-direction: column; gap: 4px; padding: 8px 5px; margin: 0; font-size: 9px; flex: 1; text-align: center; }
-  .nav-icon { font-size: 17px; }
-  .main { margin: 0; width: 100%; padding: 22px 15px 95px; }
-  .topbar { margin-bottom: 23px; }
-  .profile-role { display: none; }
-  .hero { padding: 25px 20px; }
-  .hero::after { right: 3%; top: 5%; font-size: 70px; }
-  .stats { gap: 10px; }
-  .stat { padding: 14px; }
-  .stat-value { font-size: 24px; }
-  .stat-icon { width: 30px; height: 30px; }
-  .search-row { flex-direction: column; }
-  .search-row select { max-width: none; }
-  .job-card { padding: 14px; }
-  .job-bottom { align-items: flex-start; flex-direction: column; }
-  .job-actions { width: 100%; }
-  .job-actions button { flex: 1; }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-screen {
+    gap: 30px;
+    padding: 35px;
+  }
+
+  .brand {
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .auth-screen {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 25px 18px;
+  }
+
+  .auth-showcase {
+    max-width: 560px;
+    margin: auto;
+    padding: 10px 0;
+  }
+
+  .auth-showcase .brand {
+    margin-bottom: 30px;
+  }
+
+  .auth-showcase h1 {
+    font-size: 34px;
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .auth-card {
+    max-width: 560px;
+  }
+
+  .app-layout {
+    display: block;
+  }
+
+  .sidebar {
+    width: 245px;
+    transform: translateX(-100%);
+    transition: transform .25s;
+    box-shadow: 15px 0 40px #0004;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    padding: 23px 18px 45px;
+  }
+
+  .mobile-menu {
+    display: inline-block;
+  }
+
+  .jobs-grid,
+  .resume-layout,
+  .career-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    margin-bottom: 25px;
+  }
+
+  .date-pill {
+    display: none;
+  }
+
+  .welcome-banner {
+    padding: 22px;
+  }
+
+  .banner-art {
+    font-size: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 24px 19px;
+  }
+
+  .auth-showcase h1 {
+    font-size: 29px;
+  }
+
+  .auth-description {
+    font-size: 13px;
+  }
+
+  .feature-item {
+    font-size: 12px;
+  }
+
+  .stats-grid {
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 14px;
+  }
+
+  .stat-value {
+    font-size: 25px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .welcome-banner {
+    padding: 18px;
+  }
+
+  .banner-art {
+    display: none;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row select {
+    width: 100%;
+  }
+
+  .job-card-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .application-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .application-status {
+    margin-left: 54px;
+  }
+
+  .score-layout {
+    gap: 18px;
+  }
 }
 </style>
 </head>
 
 <body>
-<div class="layout">
 
-  <aside class="sidebar">
-    <div class="logo">Career<span>Pilot</span> ✦</div>
-    <div class="tagline">YOUR AI-POWERED CAREER COMPANION</div>
+<!-- AUTHENTICATION SCREEN -->
+<section id="authScreen" class="auth-screen">
 
-    <div class="nav-label">WORKSPACE</div>
-    <div class="nav-item active" data-page="dashboard"><span class="nav-icon">⌂</span> Dashboard</div>
-    <div class="nav-item" data-page="jobs"><span class="nav-icon">⌕</span> Explore Jobs</div>
-    <div class="nav-item" data-page="applications"><span class="nav-icon">▤</span> Applications</div>
-    <div class="nav-item" data-page="resume"><span class="nav-icon">▧</span> Resume Analyzer</div>
-    <div class="nav-item" data-page="career"><span class="nav-icon">✧</span> Career Studio</div>
+  <div class="auth-showcase">
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      Career<span>Pilot</span>
+    </div>
+
+    <div class="eyebrow">Your next chapter starts here</div>
+
+    <h1>
+      Turn your ambition into
+      <span class="gradient-text">opportunity.</span>
+    </h1>
+
+    <p class="auth-description">
+      Your personal career workspace to explore opportunities,
+      organize applications, improve your resume, and plan your next move.
+    </p>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-icon">⌕</div>
+        <span>Discover opportunities that match your interests.</span>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">▤</div>
+        <span>Keep your job applications organized in one place.</span>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">✧</div>
+        <span>Practice career writing and review your resume.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-card">
+    <div class="eyebrow">CAREERPILOT WORKSPACE</div>
+    <h2 id="authHeading">Welcome back</h2>
+    <p class="auth-sub" id="authSub">
+      Sign in to continue to your career dashboard.
+    </p>
+
+    <div class="auth-tabs">
+      <button
+        type="button"
+        id="loginTab"
+        class="auth-tab active"
+        onclick="setAuthMode('login')">
+        Log in
+      </button>
+
+      <button
+        type="button"
+        id="signupTab"
+        class="auth-tab"
+        onclick="setAuthMode('signup')">
+        Sign up
+      </button>
+    </div>
+
+    <form id="authForm">
+      <div class="field hidden" id="nameField">
+        <label for="authName">Full name</label>
+        <input
+          type="text"
+          id="authName"
+          placeholder="Enter your name"
+          autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label for="authEmail">Email address</label>
+        <input
+          type="email"
+          id="authEmail"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required>
+      </div>
+
+      <div class="field">
+        <label for="authPassword">Password</label>
+
+        <div class="password-wrap">
+          <input
+            type="password"
+            id="authPassword"
+            placeholder="At least 6 characters"
+            autocomplete="current-password"
+            minlength="6"
+            required>
+
+          <button
+            class="show-pass"
+            type="button"
+            onclick="togglePassword()">
+            Show
+          </button>
+        </div>
+      </div>
+
+      <p id="authError" class="auth-error" role="alert"></p>
+
+      <button type="submit" id="authSubmit" class="primary-btn">
+        Log in to CareerPilot ↗
+      </button>
+    </form>
+
+    <p class="auth-note">
+      Frontend demo only. Do not use a real or reused password.
+      Demo account details are saved in this browser for testing.
+      Real secure authentication requires an authentication service.
+    </p>
+  </div>
+</section>
+
+
+<!-- MAIN APPLICATION -->
+<div id="appLayout" class="app-layout hidden">
+
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      Career<span>Pilot</span>
+    </div>
+
+    <div class="sidebar-label">WORKSPACE</div>
+
+    <nav class="nav-list">
+      <button class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+        <span class="nav-icon">⌂</span> Dashboard
+      </button>
+
+      <button class="nav-item" data-page="jobs" onclick="navigate('jobs')">
+        <span class="nav-icon">⌕</span> Explore jobs
+      </button>
+
+      <button class="nav-item" data-page="applications" onclick="navigate('applications')">
+        <span class="nav-icon">▤</span> Applications
+      </button>
+
+      <button class="nav-item" data-page="resume" onclick="navigate('resume')">
+        <span class="nav-icon">◫</span> Resume analyzer
+      </button>
+
+      <button class="nav-item" data-page="career" onclick="navigate('career')">
+        <span class="nav-icon">✧</span> Career studio
+      </button>
+    </nav>
 
     <div class="sidebar-bottom">
-      <p>✦ Your next chapter starts here.</p>
-      <small>Discover opportunities, build confidence, and take the next step in your career.</small>
+      <div class="sidebar-label">YOUR ACCOUNT</div>
+
+      <div class="sidebar-profile">
+        <div class="avatar" id="profileAvatar">FP</div>
+
+        <div class="profile-text">
+          <strong id="profileName">Future Professional</strong>
+          <small>Career workspace</small>
+        </div>
+
+        <button class="logout-btn" onclick="logout()" title="Log out" aria-label="Log out">
+          ↪
+        </button>
+      </div>
     </div>
   </aside>
 
-  <main class="main">
+
+  <main class="main-content">
+
     <header class="topbar">
-      <div>
-        <div class="eyebrow">YOUR CAREER, REIMAGINED</div>
-        <h1 id="pageTitle">Your career dashboard</h1>
-      </div>
-      <div class="profile">
-        <div class="avatar">CP</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="mobile-menu" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
         <div>
-          <div class="profile-name">Future Professional</div>
-          <div class="profile-role">Student account</div>
+          <div class="eyebrow">YOUR CAREER, IN ONE PLACE</div>
+          <h2 id="topbarTitle" style="margin-top:5px">Dashboard</h2>
         </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="date-pill" id="todayDate"></div>
+        <div class="avatar" id="topAvatar">FP</div>
       </div>
     </header>
 
-    <!-- DASHBOARD -->
-    <section class="page active" id="dashboard">
-      <div class="hero">
-        <div class="eyebrow">✦ YOUR PERSONAL CAREER AGENT</div>
-        <h1>Make your next move with <span class="gradient">confidence.</span></h1>
-        <p>
-          Discover opportunities that match your skills, uncover what employers
-          are looking for, and prepare for your next big opportunity — all in one place.
-        </p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" onclick="navigate('jobs')">Explore opportunities ↗</button>
-          <button class="btn btn-secondary" onclick="navigate('resume')">Analyze my resume</button>
-        </div>
-      </div>
 
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-top">Recommended jobs <span class="stat-icon">⌕</span></div>
-          <div class="stat-value" id="statJobs">6</div>
-          <div class="stat-foot">Curated sample opportunities</div>
-        </div>
-        <div class="stat">
-          <div class="stat-top">Applications <span class="stat-icon">▤</span></div>
-          <div class="stat-value" id="statApplied">0</div>
-          <div class="stat-foot">Tracked by you</div>
-        </div>
-        <div class="stat">
-          <div class="stat-top">Saved jobs <span class="stat-icon">♡</span></div>
-          <div class="stat-value" id="statSaved">0</div>
-          <div class="stat-foot">Your shortlist</div>
-        </div>
-        <div class="stat">
-          <div class="stat-top">Resume match <span class="stat-icon">✧</span></div>
-          <div class="stat-value" id="statMatch">--%</div>
-          <div class="stat-foot">Based on your sample analysis</div>
-        </div>
-      </div>
+    <!-- DASHBOARD PAGE -->
+    <section id="page-dashboard" class="page active">
 
-      <div class="content-grid">
-        <div class="section">
-          <div class="section-heading">
-            <div><h2>Recommended for you</h2><p>Explore roles based on your career interests.</p></div>
-            <button class="text-btn" onclick="navigate('jobs')">View all ↗</button>
-          </div>
-          <div class="job-list" id="dashboardJobs"></div>
-        </div>
-
+      <div class="welcome-banner">
         <div>
-          <div class="panel">
-            <h2>Resume analysis</h2>
-            <p class="muted small">Build a clearer picture of your strengths.</p>
-            <label class="upload-zone" for="resumeFile" style="display:block">
-              <div class="upload-icon">☁</div>
-              <p id="uploadTitle">Upload your resume</p>
-              <small>PDF, DOC, or DOCX · Select a file</small>
-            </label>
-            <input id="resumeFile" type="file" accept=".pdf,.doc,.docx">
-            <div class="field">
-              <label for="targetRole">Target role</label>
-              <input id="targetRole" placeholder="e.g. Frontend Developer">
-            </div>
-            <div class="field">
-              <label for="targetSkills">Your skills</label>
-              <input id="targetSkills" placeholder="HTML, CSS, JavaScript">
-            </div>
-            <button class="btn btn-primary full" onclick="analyzeResume()">Analyze my profile ✧</button>
-          </div>
-
-          <div class="panel">
-            <h2>Career activity</h2>
-            <p class="muted small">Your recent actions</p>
-            <div id="activityList"><div class="empty">Your career journey starts here.</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- JOB EXPLORER -->
-    <section class="page" id="jobs">
-      <div class="section-heading">
-        <div><h2>Explore opportunities</h2><p>Find a role that fits your interests and skills.</p></div>
-      </div>
-      <div class="panel">
-        <div class="search-row">
-          <input class="search-input" id="jobSearch" placeholder="Search roles, skills, or companies..." oninput="renderJobs()">
-          <select class="search-input" id="jobType" onchange="renderJobs()">
-            <option value="all">All types</option>
-            <option value="Internship">Internships</option>
-            <option value="Full-time">Full-time</option>
-          </select>
-          <select class="search-input" id="jobSort" onchange="renderJobs()">
-            <option value="match">Best match</option>
-            <option value="name">Job title</option>
-          </select>
-        </div>
-        <p class="muted small" id="jobCount"></p>
-      </div>
-      <div class="job-list" id="allJobs"></div>
-    </section>
-
-    <!-- APPLICATIONS -->
-    <section class="page" id="applications">
-      <div class="section-heading">
-        <div><h2>Your application tracker</h2><p>Keep your job-search progress organized.</p></div>
-        <button class="btn btn-primary" onclick="navigate('jobs')">+ Find jobs</button>
-      </div>
-      <div class="stats">
-        <div class="stat"><div class="stat-top">Total tracked</div><div class="stat-value" id="trackTotal">0</div></div>
-        <div class="stat"><div class="stat-top">Applied</div><div class="stat-value" id="trackApplied">0</div></div>
-        <div class="stat"><div class="stat-top">Interview</div><div class="stat-value" id="trackInterview">0</div></div>
-        <div class="stat"><div class="stat-top">Offers</div><div class="stat-value" id="trackOffer">0</div></div>
-      </div>
-      <div class="panel">
-        <div class="section-heading">
-          <h2>Application history</h2>
-          <select class="search-input" id="statusFilter" onchange="renderApplications()" style="width:auto">
-            <option value="all">All statuses</option>
-            <option value="Saved">Saved</option>
-            <option value="Applied">Applied</option>
-            <option value="Interview">Interview</option>
-            <option value="Offer">Offer</option>
-          </select>
-        </div>
-        <div id="applicationList"></div>
-      </div>
-    </section>
-
-    <!-- RESUME ANALYZER -->
-    <section class="page" id="resume">
-      <div class="content-grid">
-        <div class="panel">
-          <div class="eyebrow">PROFILE INTELLIGENCE</div>
-          <h2>Resume analyzer</h2>
-          <p class="muted small" style="margin-top:8px;line-height:1.8">
-            Upload your resume and describe your goals to explore a sample
-            analysis of your profile.
+          <div class="eyebrow">YOUR JOURNEY CONTINUES</div>
+          <h2>Welcome back, <span class="gradient-text" id="welcomeName">there</span> ✦</h2>
+          <p>
+            Small steps today can lead to exciting opportunities tomorrow.
+            Explore jobs, track applications, and keep building your future.
           </p>
-          <label class="upload-zone" for="resumeFile2" style="display:block">
-            <div class="upload-icon">▧</div>
-            <p id="uploadTitle2">Choose your resume file</p>
-            <small>PDF, DOC, or DOCX</small>
-          </label>
-          <input id="resumeFile2" type="file" accept=".pdf,.doc,.docx">
-          <div class="field"><label for="resumeRole">Desired job role</label><input id="resumeRole" placeholder="e.g. Software Developer"></div>
-          <div class="field"><label for="resumeSkills">Skills you currently have</label><textarea id="resumeSkills" placeholder="Enter skills separated by commas..."></textarea></div>
-          <button class="btn btn-primary full" onclick="analyzeResume()">Generate sample analysis ✧</button>
-          <p class="muted small" style="margin-top:12px;line-height:1.7">Demo limitation: this frontend does not read resume document contents or run a real AI model.</p>
         </div>
-        <div class="panel">
-          <h2>Analysis results</h2>
-          <p class="muted small" style="margin-top:7px">Your demonstration report appears here.</p>
-          <div id="resumeResults" class="empty">Upload a file, enter your skills, and run the sample analysis.</div>
+
+        <div class="banner-art">✧</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Saved jobs</span>
+            <span class="stat-icon">♡</span>
+          </div>
+          <div class="stat-value" id="savedCount">0</div>
+          <div class="stat-label">Opportunities you bookmarked</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Applications</span>
+            <span class="stat-icon">▤</span>
+          </div>
+          <div class="stat-value" id="applicationCount">0</div>
+          <div class="stat-label">Jobs you've applied to</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Interviews</span>
+            <span class="stat-icon">✧</span>
+          </div>
+          <div class="stat-value" id="interviewCount">0</div>
+          <div class="stat-label">Applications in interview stage</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Resume score</span>
+            <span class="stat-icon">◫</span>
+          </div>
+          <div class="stat-value" id="resumeScoreStat">—</div>
+          <div class="stat-label">Based on your latest text review</div>
         </div>
       </div>
+
+      <div class="section-title-row">
+        <h3>Recommended opportunities</h3>
+        <button class="text-btn" onclick="navigate('jobs')">Explore all jobs →</button>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>Explore opportunities</h3>
+            <span>Sample listings</span>
+          </div>
+          <div class="job-list" id="recommendedJobs"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>Recent activity</h3>
+            <span>Your workspace</span>
+          </div>
+          <div class="activity-list" id="activityList"></div>
+        </div>
+      </div>
+
+      <p class="footer-note">
+        CareerPilot is a frontend prototype. Job listings and career tools are demonstrations.
+      </p>
     </section>
 
-    <!-- CAREER STUDIO -->
-    <section class="page" id="career">
-      <div class="content-grid">
+
+    <!-- JOBS PAGE -->
+    <section id="page-jobs" class="page">
+      <div class="page-heading">
+        <div class="eyebrow">FIND YOUR NEXT OPPORTUNITY</div>
+        <h1>Explore jobs<span class="gradient-text">.</span></h1>
+        <p>Discover sample roles, save opportunities, and keep track of applications.</p>
+      </div>
+
+      <div class="search-row">
+        <div class="search-box">
+          <span>⌕</span>
+          <input
+            type="search"
+            id="jobSearch"
+            placeholder="Search roles, companies, or skills..."
+            oninput="renderJobs()">
+        </div>
+
+        <select id="jobTypeFilter" onchange="renderJobs()" aria-label="Filter by job type">
+          <option value="all">All job types</option>
+          <option value="Internship">Internship</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Remote">Remote</option>
+        </select>
+      </div>
+
+      <div class="section-title-row" style="margin-top:0">
+        <h3>Available opportunities</h3>
+        <span class="muted" id="jobResultsCount" style="font-size:12px"></span>
+      </div>
+
+      <div class="jobs-grid" id="allJobs"></div>
+    </section>
+
+
+    <!-- APPLICATIONS PAGE -->
+    <section id="page-applications" class="page">
+      <div class="page-heading">
+        <div class="eyebrow">STAY ORGANIZED</div>
+        <h1>Your applications<span class="gradient-text">.</span></h1>
+        <p>Keep your application progress visible and update each status as needed.</p>
+      </div>
+
+      <div class="stats-grid" style="margin-bottom:24px">
+        <div class="stat-card">
+          <div class="stat-label">Total applications</div>
+          <div class="stat-value" id="appTotal">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Applied</div>
+          <div class="stat-value" id="appApplied">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Interview</div>
+          <div class="stat-value" id="appInterview">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Offers</div>
+          <div class="stat-value" id="appOffer">0</div>
+        </div>
+      </div>
+
+      <div class="application-list" id="applicationList"></div>
+    </section>
+
+
+    <!-- RESUME ANALYZER PAGE -->
+    <section id="page-resume" class="page">
+      <div class="page-heading">
+        <div class="eyebrow">MAKE YOUR RESUME STRONGER</div>
+        <h1>Resume analyzer<span class="gradient-text">.</span></h1>
+        <p>Review resume text for useful sections, skills, and areas to improve.</p>
+      </div>
+
+      <div class="resume-layout">
         <div class="panel">
-          <div class="eyebrow">YOUR PERSONAL CAREER STUDIO</div>
-          <h2>Prepare for your next opportunity</h2>
-          <div class="field">
-            <label for="studioRole">Job title</label>
-            <input id="studioRole" placeholder="e.g. Frontend Developer">
+          <div class="panel-heading">
+            <h3>Upload your resume</h3>
+            <span>PDF, DOCX, or TXT</span>
           </div>
-          <div class="field">
-            <label for="studioCompany">Company name</label>
-            <input id="studioCompany" placeholder="e.g. Example Technologies">
+
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">◫</div>
+            <h3 id="uploadTitle">Drop your file here</h3>
+            <p id="uploadDescription">Or choose a file from your device.</p>
+
+            <label for="resumeFile" class="upload-button">Choose file</label>
+            <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt">
+
+            <p style="margin-top:12px">This demo does not upload files to a server.</p>
           </div>
-          <div class="field">
-            <label for="studioSkills">Your skills and strengths</label>
-            <textarea id="studioSkills" placeholder="Describe your skills, projects, and interests..."></textarea>
+
+          <div class="field" style="margin-top:20px">
+            <label for="resumeText">Or paste your resume text</label>
+            <textarea
+              id="resumeText"
+              class="resume-textarea"
+              placeholder="Paste your resume text here, including education, skills, projects, and experience..."></textarea>
           </div>
+
+          <button class="primary-btn" onclick="analyzeResume()">Review my resume ↗</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>Review results</h3>
+            <span>Demo analysis</span>
+          </div>
+
+          <div id="resumeResults">
+            <div class="empty-state">
+              <div class="empty-icon">✧</div>
+              <h3>Your review will appear here</h3>
+              <p>Paste your resume text and select the review button to begin.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-note">
+        The score is a simple heuristic, not an AI evaluation or a guarantee of job success.
+      </p>
+    </section>
+
+
+    <!-- CAREER STUDIO PAGE -->
+    <section id="page-career" class="page">
+      <div class="page-heading">
+        <div class="eyebrow">PRACTICE YOUR NEXT MOVE</div>
+        <h1>Career studio<span class="gradient-text">.</span></h1>
+        <p>Draft professional messages, prepare for interviews, and build your career plan.</p>
+      </div>
+
+      <div class="career-grid">
+
+        <div class="career-card">
+          <div class="career-card-icon">✉</div>
+          <h3>Cover letter starter</h3>
+          <p>Generate a customizable cover letter draft using your details.</p>
+
           <div class="field">
-            <label for="studioTool">Choose a career tool</label>
-            <select id="studioTool">
-              <option value="cover">Cover letter draft</option>
-              <option value="interview">Interview preparation</option>
-              <option value="gaps">Skill gap suggestions</option>
+            <label for="coverRole">Role you're applying for</label>
+            <input id="coverRole" placeholder="e.g. Frontend Developer Intern">
+          </div>
+
+          <div class="field">
+            <label for="coverSkills">Your skills and strengths</label>
+            <textarea id="coverSkills" placeholder="e.g. HTML, CSS, JavaScript, problem-solving"></textarea>
+          </div>
+
+          <button class="small-btn solid" onclick="generateCoverLetter()">Create draft ↗</button>
+
+          <div id="coverOutput" class="generated-output hidden"></div>
+          <div id="coverActions" class="output-actions hidden">
+            <button class="small-btn" onclick="copyOutput('coverOutput')">Copy draft</button>
+          </div>
+        </div>
+
+
+        <div class="career-card">
+          <div class="career-card-icon">◎</div>
+          <h3>Interview practice</h3>
+          <p>Explore sample questions and structure your answers.</p>
+
+          <div class="field">
+            <label for="interviewRole">Interview role</label>
+            <input id="interviewRole" placeholder="e.g. Software Developer Intern">
+          </div>
+
+          <div class="field">
+            <label for="interviewType">Question category</label>
+            <select id="interviewType">
+              <option value="technical">Technical</option>
+              <option value="behavioral">Behavioral</option>
+              <option value="hr">HR and introduction</option>
             </select>
           </div>
-          <button class="btn btn-primary full" onclick="generateCareerTool()">Generate career guidance ✧</button>
+
+          <button class="small-btn solid" onclick="generateInterviewQuestions()">Show practice questions ↗</button>
+
+          <div id="interviewOutput" class="generated-output hidden"></div>
+          <div id="interviewActions" class="output-actions hidden">
+            <button class="small-btn" onclick="copyOutput('interviewOutput')">Copy questions</button>
+          </div>
         </div>
-        <div class="panel">
-          <h2>Your career guidance</h2>
-          <p class="muted small" style="margin-top:7px">Personalized demo output</p>
-          <div id="careerOutput" class="empty">Choose a tool and enter your career details to begin.</div>
-          <button class="btn btn-secondary full" id="copyBtn" style="display:none" onclick="copyCareerOutput()">Copy generated text</button>
+
+
+        <div class="career-card">
+          <div class="career-card-icon">⌁</div>
+          <h3>Career roadmap</h3>
+          <p>Build a starter learning roadmap for a career you want to explore.</p>
+
+          <div class="field">
+            <label for="roadmapGoal">Your career goal</label>
+            <input id="roadmapGoal" placeholder="e.g. Full Stack Developer">
+          </div>
+
+          <div class="field">
+            <label for="roadmapLevel">Current level</label>
+            <select id="roadmapLevel">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+            </select>
+          </div>
+
+          <button class="small-btn solid" onclick="generateRoadmap()">Build my roadmap ↗</button>
+
+          <div id="roadmapOutput" class="generated-output hidden"></div>
+          <div id="roadmapActions" class="output-actions hidden">
+            <button class="small-btn" onclick="copyOutput('roadmapOutput')">Copy roadmap</button>
+          </div>
         </div>
+
+
+        <div class="career-card">
+          <div class="career-card-icon">✧</div>
+          <h3>Professional introduction</h3>
+          <p>Create a starting point for a professional bio or networking introduction.</p>
+
+          <div class="field">
+            <label for="introField">Your background and interests</label>
+            <textarea id="introField" placeholder="e.g. Computer science student interested in web development and creative projects"></textarea>
+          </div>
+
+          <button class="small-btn solid" onclick="generateIntro()">Write introduction ↗</button>
+
+          <div id="introOutput" class="generated-output hidden"></div>
+          <div id="introActions" class="output-actions hidden">
+            <button class="small-btn" onclick="copyOutput('introOutput')">Copy introduction</button>
+          </div>
+        </div>
+
       </div>
     </section>
 
   </main>
 </div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <div class="modal-head">
-      <div><div class="eyebrow">CAREERPILOT</div><h2 id="modalTitle">Details</h2></div>
-      <button class="close-btn" onclick="closeModal()" aria-label="Close">×</button>
-    </div>
-    <div class="modal-content" id="modalContent"></div>
-    <button class="btn btn-primary full" onclick="closeModal()">Done</button>
-  </div>
-</div>
 
 <script>
-// --------------------------------------------------
-// SAMPLE DATA: These are illustrative, not live jobs.
-// --------------------------------------------------
-
-const jobs = [
-  {id:1,title:"Frontend Developer Intern",company:"PixelCraft Studio",icon:"✦",type:"Internship",location:"Remote",pay:"Stipend varies",match:96,skills:["HTML","CSS","JavaScript"],deadline:"Sample deadline: 15 Nov",desc:"A sample frontend opportunity focused on building responsive user interfaces."},
-  {id:2,title:"Web Development Intern",company:"NovaTech Labs",icon:"◈",type:"Internship",location:"Hybrid",pay:"Stipend varies",match:92,skills:["HTML","CSS","React"],deadline:"Sample deadline: 20 Nov",desc:"A sample web development role involving website layouts and interactive features."},
-  {id:3,title:"Junior Java Developer",company:"CodeSphere",icon:"⌘",type:"Full-time",location:"On-site",pay:"As per employer",match:78,skills:["Java","OOP","SQL"],deadline:"Verify with employer",desc:"A sample entry-level role focused on Java programming and application development."},
-  {id:4,title:"UI Developer Intern",company:"DreamPixel",icon:"◇",type:"Internship",location:"Remote",pay:"Stipend varies",match:89,skills:["HTML","CSS","UI Design"],deadline:"Sample deadline: 25 Nov",desc:"A sample opportunity to create accessible and visually appealing interfaces."},
-  {id:5,title:"Software Engineering Intern",company:"TechNova",icon:"⚡",type:"Internship",location:"Hybrid",pay:"Stipend varies",match:84,skills:["JavaScript","Git","Problem Solving"],deadline:"Verify with employer",desc:"A sample internship to develop programming fundamentals and software projects."},
-  {id:6,title:"Junior Web Designer",company:"CreativeGrid",icon:"✧",type:"Full-time",location:"Remote",pay:"As per employer",match:81,skills:["CSS","Figma","HTML"],deadline:"Verify with employer",desc:"A sample role combining website styling, layout design, and frontend collaboration."}
-];
-
-let saved = new Set();
-let applications = [];
-let uploadedFile = "";
-let latestAnalysis = null;
-let careerText = "";
-let activities = [];
+/* ==========================================
+   CAREERPILOT — FRONTEND DEMO
+   ========================================== */
 
 const $ = id => document.getElementById(id);
 
-function toast(message) {
-  const el = $("toast");
-  el.textContent = message;
-  el.classList.add("show");
-  clearTimeout(toast.timer);
-  toast.timer = setTimeout(() => el.classList.remove("show"), 2800);
-}
+let authMode = "login";
+let sessionUser = null;
 
-function logActivity(message) {
-  activities.unshift({message,time:new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})});
-  activities = activities.slice(0,5);
-  renderActivity();
-}
+const DEMO_USERS_KEY = "careerPilotDemoUsers";
+const USER_DATA_PREFIX = "careerPilotData_";
 
-function renderActivity() {
-  $("activityList").innerHTML = activities.length
-    ? activities.map(a => `<div class="activity"><div class="activity-dot"></div><p>${escapeHTML(a.message)}<small>${escapeHTML(a.time)}</small></p></div>`).join("")
-    : '<div class="empty">Your career journey starts here.</div>';
-}
+let saved = [];
+let applications = [];
+let activities = [];
+let latestAnalysis = null;
+let uploadedFile = null;
+let careerText = {};
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, ch => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[ch]));
-}
 
-function navigate(page) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  $(page).classList.add("active");
+/* ==========================================
+   AUTHENTICATION
+   Demo-only browser storage.
+   Not suitable for real passwords.
+   ========================================== */
 
-  document.querySelectorAll(".nav-item").forEach(n => {
-    n.classList.toggle("active", n.dataset.page === page);
-  });
+function getDemoUsers() {
+  try {
+    const users = JSON.parse(localStorage.getItem(DEMO_USERS_KEY) || "{}");
 
-  const titles = {
-    dashboard:"Your career dashboard",
-    jobs:"Explore opportunities",
-    applications:"Your applications",
-    resume:"Resume analyzer",
-    career:"Career studio"
-  };
-
-  $("pageTitle").textContent = titles[page];
-  window.scrollTo({top:0,behavior:"smooth"});
-
-  if(page === "jobs") renderJobs();
-  if(page === "applications") renderApplications();
-}
-
-document.querySelectorAll(".nav-item").forEach(item => {
-  item.addEventListener("click", () => navigate(item.dataset.page));
-});
-
-function jobCard(job) {
-  const isSaved = saved.has(job.id);
-  const application = applications.find(a => a.id === job.id);
-  const alreadyApplied = application && application.status !== "Saved";
-
-  return `
-  <article class="job-card">
-    <div class="job-top">
-      <div class="company-logo">${escapeHTML(job.icon)}</div>
-      <div class="job-info">
-        <h3>${escapeHTML(job.title)}</h3>
-        <div class="company">${escapeHTML(job.company)} · ${escapeHTML(job.location)}</div>
-      </div>
-      <div class="match">${job.match}% match</div>
-    </div>
-    <div class="job-tags">
-      <span class="tag">${escapeHTML(job.type)}</span>
-      ${job.skills.map(s=>`<span class="tag">${escapeHTML(s)}</span>`).join("")}
-    </div>
-    <div class="job-bottom">
-      <small>${escapeHTML(job.pay)}</small>
-      <div class="job-actions">
-        <button class="mini-btn" onclick="toggleSave(${job.id})">${isSaved?"♥ Saved":"♡ Save"}</button>
-        <button class="mini-btn primary" ${alreadyApplied?"disabled":""} onclick="applyJob(${job.id})">${alreadyApplied?"Tracked":"Track job"}</button>
-        <button class="mini-btn" onclick="showJob(${job.id})">Details</button>
-      </div>
-    </div>
-  </article>`;
-}
-
-function renderJobs() {
-  const query = ($("jobSearch")?.value || "").toLowerCase().trim();
-  const type = $("jobType")?.value || "all";
-  const sort = $("jobSort")?.value || "match";
-
-  let filtered = jobs.filter(job => {
-    const text = [job.title,job.company,job.location,...job.skills].join(" ").toLowerCase();
-    return text.includes(query) && (type === "all" || job.type === type);
-  });
-
-  filtered.sort((a,b) => sort === "match" ? b.match-a.match : a.title.localeCompare(b.title));
-
-  $("jobCount").textContent = `${filtered.length} sample opportunities`;
-  $("allJobs").innerHTML = filtered.length
-    ? filtered.map(jobCard).join("")
-    : '<div class="panel empty">No matching sample roles. Try a different search.</div>';
-}
-
-function renderDashboard() {
-  $("dashboardJobs").innerHTML = jobs.slice(0,3).map(jobCard).join("");
-  $("statJobs").textContent = jobs.length;
-  $("statApplied").textContent = applications.filter(a=>a.status!=="Saved").length;
-  $("statSaved").textContent = saved.size;
-  $("statMatch").textContent = latestAnalysis ? latestAnalysis.score+"%" : "--%";
-}
-
-function toggleSave(id) {
-  const job = jobs.find(j=>j.id===id);
-
-  if(saved.has(id)) {
-    saved.delete(id);
-    applications = applications.filter(a => !(a.id===id && a.status==="Saved"));
-    toast("Removed from saved jobs.");
-  } else {
-    saved.add(id);
-    if(!applications.some(a=>a.id===id)) {
-      applications.push({id,status:"Saved",date:new Date().toLocaleDateString()});
+    if (!users || typeof users !== "object" || Array.isArray(users)) {
+      return {};
     }
-    toast("Job added to your shortlist.");
-    logActivity(`Saved ${job.title}`);
-  }
 
-  refresh();
+    return users;
+  } catch (error) {
+    return {};
+  }
 }
 
-function applyJob(id) {
-  const job = jobs.find(j=>j.id===id);
-  let app = applications.find(a=>a.id===id);
 
-  if(app && app.status!=="Saved") {
-    toast("This job is already tracked.");
+function setAuthMode(mode) {
+  authMode = mode;
+
+  $("authError").textContent = "";
+
+  $("authHeading").textContent =
+    mode === "login" ? "Welcome back" : "Create your account";
+
+  $("authSub").textContent =
+    mode === "login"
+      ? "Sign in to continue to your career dashboard."
+      : "Create a demo profile to explore your career workspace.";
+
+  $("nameField").classList.toggle("hidden", mode !== "signup");
+
+  $("loginTab").classList.toggle("active", mode === "login");
+  $("signupTab").classList.toggle("active", mode === "signup");
+
+  $("authSubmit").textContent =
+    mode === "login"
+      ? "Log in to CareerPilot ↗"
+      : "Create account ↗";
+
+  $("authPassword").autocomplete =
+    mode === "login" ? "current-password" : "new-password";
+
+  $("authPassword").value = "";
+}
+
+
+function togglePassword() {
+  const field = $("authPassword");
+  const button = document.querySelector(".show-pass");
+
+  field.type = field.type === "password" ? "text" : "password";
+  button.textContent = field.type === "password" ? "Show" : "Hide";
+}
+
+
+$("authForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const email = $("authEmail").value.trim().toLowerCase();
+  const password = $("authPassword").value;
+  const name = $("authName").value.trim();
+
+  $("authError").textContent = "";
+
+  if (!email || !password) {
+    $("authError").textContent = "Please enter your email and password.";
     return;
   }
 
-  if(app) app.status = "Applied";
-  else applications.push({id,status:"Applied",date:new Date().toLocaleDateString()});
+  if (password.length < 6) {
+    $("authError").textContent = "Your password must contain at least 6 characters.";
+    return;
+  }
 
-  saved.delete(id);
-  logActivity(`Marked ${job.title} as applied`);
+  const users = getDemoUsers();
+
+  if (authMode === "signup") {
+    if (!name) {
+      $("authError").textContent = "Please enter your name.";
+      return;
+    }
+
+    if (users[email]) {
+      $("authError").textContent =
+        "An account with this email already exists. Please log in instead.";
+      return;
+    }
+
+    /*
+      IMPORTANT:
+      This is only a learning prototype.
+      The password is stored in browser localStorage,
+      which is NOT secure for real authentication.
+    */
+
+    users[email] = {
+      name: name,
+      password: password
+    };
+
+    try {
+      localStorage.setItem(DEMO_USERS_KEY, JSON.stringify(users));
+    } catch (error) {
+      $("authError").textContent =
+        "Could not save the demo account. Check your browser storage settings.";
+      return;
+    }
+
+    sessionUser = {
+      email: email,
+      name: name
+    };
+
+    openApp();
+
+  } else {
+    const user = users[email];
+
+    if (!user) {
+      $("authError").textContent =
+        "No demo account was found for this email. Select Sign up to create one.";
+      return;
+    }
+
+    if (user.password !== password) {
+      $("authError").textContent =
+        "Incorrect password. Please try again.";
+      return;
+    }
+
+    sessionUser = {
+      email: email,
+      name: user.name
+    };
+
+    openApp();
+  }
+});
+
+
+function getUserStorageKey() {
+  return USER_DATA_PREFIX + (sessionUser ? sessionUser.email : "guest");
+}
+
+
+function saveUserData() {
+  if (!sessionUser) return;
+
+  const data = {
+    saved: saved,
+    applications: applications,
+    activities: activities,
+    latestAnalysis: latestAnalysis
+  };
+
+  try {
+    localStorage.setItem(getUserStorageKey(), JSON.stringify(data));
+  } catch (error) {
+    console.warn("Could not save workspace data.", error);
+  }
+}
+
+
+function loadUserData() {
+  saved = [];
+  applications = [];
+  activities = [];
+  latestAnalysis = null;
+
+  if (!sessionUser) return;
+
+  try {
+    const raw = localStorage.getItem(getUserStorageKey());
+
+    if (!raw) return;
+
+    const data = JSON.parse(raw);
+
+    saved = Array.isArray(data.saved) ? data.saved : [];
+    applications = Array.isArray(data.applications) ? data.applications : [];
+    activities = Array.isArray(data.activities) ? data.activities : [];
+    latestAnalysis = data.latestAnalysis || null;
+
+  } catch (error) {
+    console.warn("Could not load workspace data.", error);
+  }
+}
+
+
+function openApp() {
+  if (!sessionUser) return;
+
+  loadUserData();
+
+  $("authScreen").classList.add("hidden");
+  $("appLayout").classList.remove("hidden");
+
+  const name = sessionUser.name || "Future Professional";
+
+  $("profileName").textContent = name;
+  $("welcomeName").textContent = name.split(/\s+/)[0];
+
+  const initials = name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(part => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  $("profileAvatar").textContent = initials || "FP";
+  $("topAvatar").textContent = initials || "FP";
+
+  $("authPassword").value = "";
+  $("authError").textContent = "";
+
+  updateDate();
   refresh();
+  navigate("dashboard");
+
+  toast("Welcome to CareerPilot, " + name.split(/\s+/)[0] + "!");
+}
+
+
+function logout() {
+  saveUserData();
+
+  sessionUser = null;
+
+  $("appLayout").classList.add("hidden");
+  $("authScreen").classList.remove("hidden");
+
+  $("authEmail").value = "";
+  $("authPassword").value = "";
+  $("authName").value = "";
+
+  setAuthMode("login");
+
+  toast("You have logged out.");
+}
+
+
+/* ==========================================
+   SAMPLE JOB DATA
+   These are fictional demo listings.
+   ========================================== */
+
+const jobs = [
+  {
+    id: 1,
+    title: "Frontend Developer Intern",
+    company: "PixelCraft Studio",
+    logo: "✦",
+    location: "Remote",
+    type: "Internship",
+    salary: "₹8k–15k/mo",
+    skills: ["HTML", "CSS", "JavaScript"],
+    description: "Help build responsive web experiences, improve interfaces, and collaborate on creative frontend projects."
+  },
+  {
+    id: 2,
+    title: "Junior Web Developer",
+    company: "BrightLayer Tech",
+    logo: "◈",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    salary: "₹3–5 LPA",
+    skills: ["JavaScript", "React", "CSS"],
+    description: "Work with a product team to build accessible websites and learn modern web development practices."
+  },
+  {
+    id: 3,
+    title: "UI Developer Intern",
+    company: "Nova Digital",
+    logo: "✧",
+    location: "Remote",
+    type: "Internship",
+    salary: "₹10k–18k/mo",
+    skills: ["HTML", "CSS", "UI Design"],
+    description: "Support the creation of clean user interfaces and turn design concepts into responsive web pages."
+  },
+  {
+    id: 4,
+    title: "Software Engineer Trainee",
+    company: "CloudSpring Labs",
+    logo: "⌘",
+    location: "Hyderabad, India",
+    type: "Full-time",
+    salary: "₹4–6 LPA",
+    skills: ["Java", "DSA", "SQL"],
+    description: "Develop programming fundamentals while contributing to supervised software development projects."
+  },
+  {
+    id: 5,
+    title: "JavaScript Developer",
+    company: "OrbitWorks",
+    logo: "◎",
+    location: "Remote",
+    type: "Remote",
+    salary: "₹3–5 LPA",
+    skills: ["JavaScript", "APIs", "Git"],
+    description: "Build interactive interfaces and improve existing web applications in a collaborative environment."
+  },
+  {
+    id: 6,
+    title: "Web Development Intern",
+    company: "LumenStack",
+    logo: "❋",
+    location: "Mysuru, India",
+    type: "Internship",
+    salary: "₹6k–12k/mo",
+    skills: ["HTML", "CSS", "JavaScript"],
+    description: "Learn by building small websites, fixing interface issues, and practicing frontend fundamentals."
+  }
+];
+
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+
+const pageTitles = {
+  dashboard: "Dashboard",
+  jobs: "Explore jobs",
+  applications: "Applications",
+  resume: "Resume analyzer",
+  career: "Career studio"
+};
+
+
+function navigate(page) {
+  document.querySelectorAll(".page").forEach(section => {
+    section.classList.toggle("active", section.id === "page-" + page);
+  });
+
+  document.querySelectorAll(".nav-item").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === page);
+  });
+
+  $("topbarTitle").textContent = pageTitles[page] || "CareerPilot";
+  $("sidebar").classList.remove("open");
+
+  if (page === "dashboard") renderDashboard();
+  if (page === "jobs") renderJobs();
+  if (page === "applications") renderApplications();
+  if (page === "resume") renderResumeResults();
+}
+
+
+function toggleSidebar() {
+  $("sidebar").classList.toggle("open");
+}
+
+
+function updateDate() {
+  $("todayDate").textContent = new Date().toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+
+/* ==========================================
+   ACTIVITY
+   ========================================== */
+
+function addActivity(message) {
+  activities.unshift({
+    message: message,
+    date: new Date().toISOString()
+  });
+
+  activities = activities.slice(0, 12);
+
+  saveUserData();
+}
+
+
+function renderActivities() {
+  const container = $("activityList");
+
+  if (!activities.length) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding:25px 12px">
+        <div class="empty-icon">✧</div>
+        <h3>You're all caught up</h3>
+        <p>Your activity will appear here as you explore CareerPilot.</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = activities.slice(0, 6).map(item => {
+    const date = new Date(item.date);
+
+    return `
+      <div class="activity-item">
+        <span class="activity-dot"></span>
+        <div>
+          <strong>${escapeHTML(item.message)}</strong>
+          <time>${date.toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short"
+          })}</time>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+
+/* ==========================================
+   DASHBOARD
+   ========================================== */
+
+function renderDashboard() {
+  $("savedCount").textContent = saved.length;
+  $("applicationCount").textContent = applications.length;
+
+  $("interviewCount").textContent = applications.filter(app =>
+    app.status === "Interview"
+  ).length;
+
+  $("resumeScoreStat").textContent =
+    latestAnalysis ? latestAnalysis.score + "%" : "—";
+
+  const recommended = jobs.slice(0, 3);
+
+  $("recommendedJobs").innerHTML = recommended.map(job => {
+    const isSaved = saved.includes(job.id);
+    const alreadyApplied = applications.some(app => app.jobId === job.id);
+
+    return `
+      <div class="job-row">
+        <div class="company-logo">${escapeHTML(job.logo)}</div>
+
+        <div class="job-info">
+          <h4>${escapeHTML(job.title)}</h4>
+          <p>${escapeHTML(job.company)} · ${escapeHTML(job.location)}</p>
+          <div class="job-meta">
+            <span class="tag">${escapeHTML(job.type)}</span>
+            <span class="tag green">${escapeHTML(job.salary)}</span>
+          </div>
+        </div>
+
+        <button class="small-btn" onclick="toggleSave(${job.id})"
+          aria-label="${isSaved ? "Unsave" : "Save"} ${escapeHTML(job.title)}">
+          ${isSaved ? "♥" : "♡"}
+        </button>
+
+        ${alreadyApplied
+          ? `<span class="tag green">Applied</span>`
+          : `<button class="small-btn solid" onclick="applyJob(${job.id})">Apply</button>`
+        }
+      </div>
+    `;
+  }).join("");
+
+  renderActivities();
+}
+
+
+/* ==========================================
+   JOB LISTINGS
+   ========================================== */
+
+function renderJobs() {
+  const search = $("jobSearch").value.trim().toLowerCase();
+  const type = $("jobTypeFilter").value;
+
+  const filtered = jobs.filter(job => {
+    const searchable = [
+      job.title,
+      job.company,
+      job.location,
+      job.type,
+      job.description,
+      ...job.skills
+    ].join(" ").toLowerCase();
+
+    const matchesSearch = searchable.includes(search);
+    const matchesType = type === "all" || job.type === type;
+
+    return matchesSearch && matchesType;
+  });
+
+  $("jobResultsCount").textContent =
+    filtered.length + (filtered.length === 1 ? " role" : " roles");
+
+  if (!filtered.length) {
+    $("allJobs").innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⌕</div>
+        <h3>No matching opportunities</h3>
+        <p>Try another search term or change the job type filter.</p>
+      </div>
+    `;
+    return;
+  }
+
+  $("allJobs").innerHTML = filtered.map(job => {
+    const isSaved = saved.includes(job.id);
+    const alreadyApplied = applications.some(app => app.jobId === job.id);
+
+    return `
+      <article class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo">${escapeHTML(job.logo)}</div>
+
+          <div class="job-info">
+            <h3>${escapeHTML(job.title)}</h3>
+            <p>${escapeHTML(job.company)}</p>
+
+            <div class="job-meta">
+              <span class="tag">${escapeHTML(job.location)}</span>
+              <span class="tag pink">${escapeHTML(job.type)}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="job-card-description">${escapeHTML(job.description)}</p>
+
+        <div class="job-meta">
+          ${job.skills.map(skill =>
+            `<span class="tag">${escapeHTML(skill)}</span>`
+          ).join("")}
+        </div>
+
+        <div class="job-card-footer">
+          <span class="salary">${escapeHTML(job.salary)}</span>
+
+          <div class="job-card-actions">
+            <button class="small-btn" onclick="toggleSave(${job.id})">
+              ${isSaved ? "♥ Saved" : "♡ Save"}
+            </button>
+
+            ${alreadyApplied
+              ? `<span class="tag green">Applied ✓</span>`
+              : `<button class="small-btn solid" onclick="applyJob(${job.id})">Apply ↗</button>`
+            }
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+
+/* ==========================================
+   SAVE AND APPLY
+   ========================================== */
+
+function toggleSave(jobId) {
+  const index = saved.indexOf(jobId);
+
+  if (index >= 0) {
+    saved.splice(index, 1);
+    toast("Job removed from saved jobs.");
+    addActivity("Removed a job from saved opportunities.");
+  } else {
+    saved.push(jobId);
+    toast("Job saved successfully.");
+    addActivity("Saved a job opportunity.");
+  }
+
+  saveUserData();
+  refresh();
+}
+
+
+function applyJob(jobId) {
+  const job = jobs.find(item => item.id === jobId);
+
+  if (!job) return;
+
+  if (applications.some(app => app.jobId === jobId)) {
+    toast("You've already added this job to your applications.");
+    return;
+  }
+
+  applications.unshift({
+    id: Date.now(),
+    jobId: job.id,
+    title: job.title,
+    company: job.company,
+    location: job.location,
+    type: job.type,
+    status: "Applied",
+    appliedDate: new Date().toISOString()
+  });
+
+  addActivity("Added an application for " + job.title + ".");
+  saveUserData();
+  refresh();
+
+  toast("Application added to your tracker.");
+}
+
+
+function updateApplicationStatus(applicationId, status) {
+  const app = applications.find(item => item.id === applicationId);
+
+  if (!app) return;
+
+  app.status = status;
+
+  addActivity("Updated " + app.title + " to: " + status + ".");
+  saveUserData();
+  refresh();
+
   toast("Application status updated.");
-
-  showModal("Application tracked",
-    `You have marked "${job.title}" at ${job.company} as Applied.\n\nThis only updates your local demo tracker. It does not submit an actual job application.`);
 }
 
-function showJob(id) {
-  const job = jobs.find(j=>j.id===id);
-  showModal(job.title,
-`${job.company}
 
-Role type: ${job.type}
-Location: ${job.location}
-Compensation: ${job.pay}
-Sample match score: ${job.match}%
+function removeApplication(applicationId) {
+  const app = applications.find(item => item.id === applicationId);
 
-Skills listed:
-${job.skills.join(", ")}
+  if (!app) return;
 
-${job.desc}
+  applications = applications.filter(item => item.id !== applicationId);
 
-${job.deadline}
+  addActivity("Removed an application for " + app.title + ".");
+  saveUserData();
+  refresh();
 
-Important: This is fictional sample data for a prototype. Verify real vacancies, eligibility, pay, and deadlines with the actual employer.`);
+  toast("Application removed.");
 }
+
+
+/* ==========================================
+   APPLICATION TRACKER
+   ========================================== */
+
+function renderApplications() {
+  $("appTotal").textContent = applications.length;
+
+  $("appApplied").textContent = applications.filter(app =>
+    app.status === "Applied"
+  ).length;
+
+  $("appInterview").textContent = applications.filter(app =>
+    app.status === "Interview"
+  ).length;
+
+  $("appOffer").textContent = applications.filter(app =>
+    app.status === "Offer"
+  ).length;
+
+  const container = $("applicationList");
+
+  if (!applications.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">▤</div>
+        <h3>Your tracker is ready</h3>
+        <p>Explore jobs and select Apply to add your first application.</p>
+        <button class="small-btn solid" style="margin-top:18px"
+          onclick="navigate('jobs')">Explore jobs ↗</button>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = applications.map(app => {
+    const statusClass = {
+      Applied: "status-applied",
+      Interview: "status-interview",
+      Offer: "status-interview",
+      Rejected: "status-rejected"
+    }[app.status] || "status-applied";
+
+    return `
+      <div class="application-card">
+        <div class="company-logo">▤</div>
+
+        <div class="job-info">
+          <h3>${escapeHTML(app.title)}</h3>
+          <p>${escapeHTML(app.company)} · ${escapeHTML(app.location)}</p>
+          <div class="job-meta">
+            <span class="tag">${escapeHTML(app.type)}</span>
+            <span class="tag">
+              Added ${new Date(app.appliedDate).toLocaleDateString("en-IN")}
+            </span>
+          </div>
+        </div>
+
+        <span class="application-status ${statusClass}">
+          ${escapeHTML(app.status)}
+        </span>
+
+        <select
+          aria-label="Update status for ${escapeHTML(app.title)}"
+          onchange="updateApplicationStatus(${app.id}, this.value)"
+          style="max-width:130px;border:1px solid var(--border);border-radius:9px;background:#0c0a15;color:white;padding:9px;font-size:11px">
+          <option value="Applied" ${app.status === "Applied" ? "selected" : ""}>Applied</option>
+          <option value="Interview" ${app.status === "Interview" ? "selected" : ""}>Interview</option>
+          <option value="Offer" ${app.status === "Offer" ? "selected" : ""}>Offer</option>
+          <option value="Rejected" ${app.status === "Rejected" ? "selected" : ""}>Rejected</option>
+        </select>
+
+        <button class="small-btn danger"
+          onclick="removeApplication(${app.id})"
+          aria-label="Remove application for ${escapeHTML(app.title)}">×</button>
+      </div>
+    `;
+  }).join("");
+}
+
+
+/* ==========================================
+   RESUME REVIEW
+   This is a basic local heuristic, not AI.
+   ========================================== */
+
+$("resumeFile").addEventListener("change", function(event) {
+  const file = event.target.files[0];
+
+  if (!file) return;
+
+  uploadedFile = file;
+
+  $("uploadTitle").textContent = file.name;
+  $("uploadDescription").textContent =
+    "File selected (" + formatFileSize(file.size) + ").";
+
+  const extension = file.name.split(".").pop().toLowerCase();
+
+  if (extension === "txt") {
+    const reader = new FileReader();
+
+    reader.onload = function() {
+      $("resumeText").value = String(reader.result || "");
+      toast("Text file loaded into the editor.");
+    };
+
+    reader.onerror = function() {
+      toast("Unable to read this file.");
+    };
+
+    reader.readAsText(file);
+  } else {
+    toast("File selected. For this demo, paste the resume text into the editor.");
+  }
+});
+
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
+
+const uploadZone = $("uploadZone");
+
+uploadZone.addEventListener("dragover", function(event) {
+  event.preventDefault();
+  uploadZone.classList.add("dragover");
+});
+
+uploadZone.addEventListener("dragleave", function() {
+  uploadZone.classList.remove("dragover");
+});
+
+uploadZone.addEventListener("drop", function(event) {
+  event.preventDefault();
+  uploadZone.classList.remove("dragover");
+
+  const file = event.dataTransfer.files[0];
+
+  if (!file) return;
+
+  const extension = file.name.split(".").pop().toLowerCase();
+  const allowed = ["pdf", "doc", "docx", "txt"];
+
+  if (!allowed.includes(extension)) {
+    toast("Please choose a PDF, DOC, DOCX, or TXT file.");
+    return;
+  }
+
+  uploadedFile = file;
+
+  $("uploadTitle").textContent = file.name;
+  $("uploadDescription").textContent =
+    "File selected (" + formatFileSize(file.size) + ").";
+
+  if (extension === "txt") {
+    const reader = new FileReader();
+
+    reader.onload = function() {
+      $("resumeText").value = String(reader.result || "");
+    };
+
+    reader.readAsText(file);
+  } else {
+    toast("File selected. Paste its text into the editor for this demo.");
+  }
+});
+
+
+function analyzeResume() {
+  const text = $("resumeText").value.trim();
+
+  if (text.length < 30) {
+    toast("Please paste a little more resume text before reviewing.");
+    $("resumeText").focus();
+    return;
+  }
+
+  const lower = text.toLowerCase();
+
+  const checks = [
+    {
+      name: "Contact information",
+      words: ["@", "phone", "linkedin", "github"],
+      weight: 10
+    },
+    {
+      name: "Education",
+      words: ["education", "degree", "university", "college", "bachelor"],
+      weight: 15
+    },
+    {
+      name: "Skills",
+      words: ["skills", "javascript", "python", "java", "html", "css"],
+      weight: 20
+    },
+    {
+      name: "Projects",
+      words: ["projects", "built", "developed", "created", "implemented"],
+      weight: 20
+    },
+    {
+      name: "Experience",
+      words: ["experience", "internship", "worked", "employment"],
+      weight: 15
+    },
+    {
+      name: "Achievements",
+      words: ["achievement", "award", "certification", "certified"],
+      weight: 10
+    },
+    {
+      name: "Clear structure",
+      words: ["summary", "objective", "profile", "responsibilities"],
+      weight: 10
+    }
+  ];
+
+  let score = 0;
+  const found = [];
+  const missing = [];
+
+  checks.forEach(check => {
+    const hasSection = check.words.some(word => lower.includes(word));
+
+    if (hasSection) {
+      score += check.weight;
+      found.push(check.name);
+    } else {
+      missing.push(check.name);
+    }
+  });
+
+  if (text.length > 500) score = Math.min(100, score + 5);
+
+  latestAnalysis = {
+    score: score,
+    found: found,
+    missing: missing,
+    date: new Date().toISOString()
+  };
+
+  saveUserData();
+  renderResumeResults();
+  renderDashboard();
+
+  addActivity("Reviewed resume text using the demo analyzer.");
+
+  toast("Resume text review completed.");
+}
+
+
+function renderResumeResults() {
+  const result = latestAnalysis;
+
+  if (!result) return;
+
+  const score = Math.max(0, Math.min(100, Number(result.score) || 0));
+
+  $("resumeResults").innerHTML = `
+    <div class="score-layout">
+      <div class="score-circle" style="background:conic-gradient(var(--purple) ${score * 3.6}deg, #342748 ${score * 3.6}deg)">
+        <div class="score-number">${score}<small>%</small></div>
+      </div>
+
+      <div class="analysis-content">
+        <h3>${score >= 75 ? "Good foundation!" : score >= 50 ? "Room to improve" : "Let's build it up"}</h3>
+        <p>
+          This score reflects simple keyword and section checks.
+          It does not assess your actual qualifications or guarantee hiring outcomes.
+        </p>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${score}%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis-section">
+      <h4>✓ Sections or keywords detected</h4>
+      <div class="analysis-list">
+        ${(result.found || []).length
+          ? result.found.map(item => `
+            <div class="analysis-item">
+              <span>✓</span> ${escapeHTML(item)}
+            </div>
+          `).join("")
+          : `<p class="muted" style="font-size:12px">No expected sections were detected yet.</p>`
+        }
+      </div>
+    </div>
+
+    <div class="analysis-section">
+      <h4>✧ Consider adding or reviewing</h4>
+      <div class="analysis-list">
+        ${(result.missing || []).length
+          ? result.missing.map(item => `
+            <div class="analysis-item warning">
+              <span>!</span> ${escapeHTML(item)}
+            </div>
+          `).join("")
+          : `<div class="analysis-item"><span>✓</span> The basic keyword checks were found.</div>`
+        }
+      </div>
+    </div>
+
+    <p class="muted" style="font-size:10px;margin-top:20px">
+      Last reviewed: ${new Date(result.date).toLocaleString("en-IN")}
+    </p>
+  `;
+}
+
+
+/* ==========================================
+   CAREER STUDIO
+   These tools use local templates, not AI.
+   ========================================== */
+
+function generateCoverLetter() {
+  const role = $("coverRole").value.trim();
+  const skills = $("coverSkills").value.trim();
+
+  if (!role || !skills) {
+    toast("Enter the role and your skills first.");
+    return;
+  }
+
+  const name = sessionUser ? sessionUser.name : "Your Name";
+
+  const output = `Dear Hiring Team,
+
+I am writing to express my interest in the ${role} opportunity.
+
+I am eager to learn, contribute to meaningful projects, and continue developing my professional skills. My current strengths include ${skills}.
+
+I would welcome the opportunity to contribute to your team, learn from experienced professionals, and grow through practical experience.
+
+Thank you for considering my application. I look forward to the opportunity to discuss how my interests and skills could fit this role.
+
+Sincerely,
+${name}`;
+
+  showOutput("coverOutput", "coverActions", output);
+  addActivity("Created a cover letter draft.");
+}
+
+
+function generateInterviewQuestions() {
+  const role = $("interviewRole").value.trim() || "your chosen role";
+  const type = $("interviewType").value;
+
+  const questionSets = {
+    technical: [
+      "Explain a project you have worked on and the technologies you used.",
+      "How do you approach debugging a problem?",
+      "Explain a technical concept you recently learned.",
+      "How would you make a website responsive?",
+      "What would you do if you did not know how to solve a technical problem?"
+    ],
+
+    behavioral: [
+      "Tell me about a time you learned something new.",
+      "Describe a challenge you faced while working on a project.",
+      "How do you respond to constructive feedback?",
+      "How do you organize tasks when you have multiple deadlines?",
+      "Tell me about a time you worked with others toward a goal."
+    ],
+
+    hr: [
+      "Tell me about yourself.",
+      "Why are you interested in this role?",
+      "What skills are you currently working to improve?",
+      "What kind of work would you like to do in the future?",
+      "Why should we consider you for this opportunity?"
+    ]
+  };
+
+  const questions = questionSets[type];
+
+  const output = `Practice questions for ${role}\n\n` +
+    questions.map((question, index) => `${index + 1}. ${question}`).join("\n\n") +
+    "\n\nPractice tip: Use specific examples, explain your thinking clearly, and be honest when you are still learning.";
+
+  showOutput("interviewOutput", "interviewActions", output);
+  addActivity("Generated interview practice questions.");
+}
+
+
+function generateRoadmap() {
+  const goal = $("roadmapGoal").value.trim();
+  const level = $("roadmapLevel").value;
+
+  if (!goal) {
+    toast("Enter a career goal first.");
+    return;
+  }
+
+  const firstStep = level === "beginner"
+    ? "Step 1 — Build the foundations\nLearn the core concepts and terminology for your chosen field. Follow beginner lessons and take notes."
+    : "Step 1 — Review your foundations\nIdentify gaps in your existing knowledge and strengthen the concepts you find difficult.";
+
+  const output = `Your starter roadmap: ${goal}
+
+${firstStep}
+
+Step 2 — Practice regularly
+Complete small exercises and practice applying each concept instead of only watching tutorials.
+
+Step 3 — Build a small project
+Create a beginner-friendly project that demonstrates what you have learned. Keep the scope manageable and finish it.
+
+Step 4 — Document your work
+Write down what the project does, which technologies you used, and what you learned while building it.
+
+Step 5 — Create a portfolio
+Organize your projects, skills, and learning progress in a simple portfolio or professional profile.
+
+Step 6 — Prepare for opportunities
+Practice explaining your projects, review relevant interview topics, and look for suitable internships or entry-level roles.
+
+Suggested weekly routine:
+• Learn a concept.
+• Practice it with a small exercise.
+• Apply it to your project.
+• Review what you learned.
+
+Adjust the order and pace based on the requirements of your chosen career.`;
+
+  showOutput("roadmapOutput", "roadmapActions", output);
+  addActivity("Created a career roadmap.");
+}
+
+
+function generateIntro() {
+  const background = $("introField").value.trim();
+
+  if (!background) {
+    toast("Enter a few details about your background first.");
+    return;
+  }
+
+  const name = sessionUser ? sessionUser.name : "Your Name";
+
+  const output = `Hello, I'm ${name}.
+
+${background}
+
+I enjoy learning new technologies, solving problems, and applying what I learn through practical projects. I am looking forward to developing my skills further and contributing to meaningful work.
+
+I welcome opportunities to learn, collaborate, and grow professionally.`;
+
+  showOutput("introOutput", "introActions", output);
+  addActivity("Drafted a professional introduction.");
+}
+
+
+function showOutput(outputId, actionsId, text) {
+  $(outputId).textContent = text;
+  $(outputId).classList.remove("hidden");
+  $(actionsId).classList.remove("hidden");
+}
+
+
+async function copyOutput(outputId) {
+  const text = $(outputId).textContent;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    toast("Text copied to clipboard.");
+  } catch (error) {
+    const temporary = document.createElement("textarea");
+    temporary.value = text;
+    temporary.style.position = "fixed";
+    temporary.style.opacity = "0";
+
+    document.body.appendChild(temporary);
+    temporary.select();
+
+    try {
+      document.execCommand("copy");
+      toast("Text copied to clipboard.");
+    } catch (copyError) {
+      toast("Copy was blocked by your browser. Please select and copy the text manually.");
+    }
+
+    temporary.remove();
+  }
+}
+
+
+/* ==========================================
+   UTILITIES
+   ========================================== */
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+
+let toastTimeout;
+
+function toast(message) {
+  const element = $("toast");
+
+  element.textContent = message;
+  element.classList.add("show");
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(() => {
+    element.classList.remove("show");
+  }, 2800);
+}
+
 
 function refresh() {
   renderDashboard();
   renderJobs();
   renderApplications();
+  renderResumeResults();
 }
 
-function renderApplications() {
-  const filter = $("statusFilter")?.value || "all";
-  const list = applications.filter(a=>filter==="all" || a.status===filter);
 
-  $("trackTotal").textContent = applications.length;
-  $("trackApplied").textContent = applications.filter(a=>a.status==="Applied").length;
-  $("trackInterview").textContent = applications.filter(a=>a.status==="Interview").length;
-  $("trackOffer").textContent = applications.filter(a=>a.status==="Offer").length;
+/* ==========================================
+   STARTUP
+   ========================================== */
 
-  $("applicationList").innerHTML = list.length ? list.map(app => {
-    const job = jobs.find(j=>j.id===app.id);
-    return `<div class="job-card" style="margin-bottom:12px">
-      <div class="job-top">
-        <div class="company-logo">${escapeHTML(job.icon)}</div>
-        <div class="job-info">
-          <h3>${escapeHTML(job.title)}</h3>
-          <div class="company">${escapeHTML(job.company)} · Added ${escapeHTML(app.date)}</div>
-        </div>
-        <span class="tag">${escapeHTML(app.status)}</span>
-      </div>
-      <div class="job-bottom" style="margin-top:14px">
-        <small>Demo tracker · Not connected to employers</small>
-        <div class="job-actions">
-          <select class="mini-btn" aria-label="Update application status" onchange="updateStatus(${app.id},this.value)">
-            ${["Saved","Applied","Interview","Offer","Rejected"].map(s=>`<option ${s===app.status?"selected":""}>${s}</option>`).join("")}
-          </select>
-          <button class="mini-btn" onclick="removeApplication(${app.id})">Remove</button>
-        </div>
-      </div>
-    </div>`;
-  }).join("") : '<div class="empty">No applications in this view yet.<br>Explore jobs and start tracking your progress.</div>';
-}
-
-function updateStatus(id,status) {
-  const app = applications.find(a=>a.id===id);
-  if(!app) return;
-  app.status = status;
-  if(status==="Saved") saved.add(id);
-  else saved.delete(id);
-  logActivity(`Updated application status to ${status}`);
-  refresh();
-  toast("Application status updated.");
-}
-
-function removeApplication(id) {
-  applications = applications.filter(a=>a.id!==id);
-  saved.delete(id);
-  refresh();
-  toast("Removed from tracker.");
-}
-
-function showModal(title,content) {
-  $("modalTitle").textContent = title;
-  $("modalContent").textContent = content;
-  $("modalBackdrop").classList.add("show");
-}
-
-function closeModal() {
-  $("modalBackdrop").classList.remove("show");
-}
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape") closeModal();
-});
-
-// Resume selection: only the filename is read, not document contents.
-function handleFile(file) {
-  if(!file) return;
-
-  const allowed = /\.(pdf|doc|docx)$/i.test(file.name);
-  if(!allowed) {
-    toast("Please select a PDF, DOC, or DOCX file.");
-    return;
-  }
-
-  uploadedFile = file.name;
-  $("uploadTitle").textContent = file.name;
-  $("uploadTitle2").textContent = file.name;
-  toast("Resume file selected.");
-  logActivity("Selected a resume file");
-}
-
-$("resumeFile").addEventListener("change",e=>handleFile(e.target.files[0]));
-$("resumeFile2").addEventListener("change",e=>handleFile(e.target.files[0]));
-
-function analyzeResume() {
-  const role = ($("resumeRole").value || $("targetRole").value || "").trim();
-  const skillsText = ($("resumeSkills").value || $("targetSkills").value || "").trim();
-
-  if(!uploadedFile) {
-    toast("Select your resume file first.");
-    return;
-  }
-
-  if(!role || !skillsText) {
-    toast("Enter your target role and skills.");
-    navigate("resume");
-    return;
-  }
-
-  const skills = skillsText.split(/[,;\n]+/).map(s=>s.trim()).filter(Boolean);
-  const roleText = role.toLowerCase();
-
-  const suggestions = roleText.includes("front") || roleText.includes("web")
-    ? ["Responsive design","JavaScript DOM manipulation","Git and GitHub","Accessibility"]
-    : roleText.includes("java")
-    ? ["Object-oriented programming","Collections and exception handling","SQL","Git"]
-    : ["Problem-solving","Communication","Git and GitHub","Role-specific project experience"];
-
-  const known = skills.map(s=>s.toLowerCase());
-  const missing = suggestions.filter(s=>!known.some(k=>k.includes(s.toLowerCase()) || s.toLowerCase().includes(k)));
-
-  const score = Math.min(95,Math.round(45 + Math.min(skills.length,8)*6));
-
-  latestAnalysis = {role,skills,missing,score};
-
-  $("resumeResults").className = "";
-  $("resumeResults").innerHTML = `
-    <div style="margin-top:22px">
-      <div class="eyebrow">DEMO COMPATIBILITY SCORE</div>
-      <div style="font:700 48px 'Space Grotesk';margin:8px 0">${score}%</div>
-      <div class="progress"><div style="width:${score}%"></div></div>
-      <p class="muted small" style="margin-top:13px;line-height:1.8">Illustrative score based on the number of skills you entered. It is not extracted from your resume or validated against a real job description.</p>
-      <div class="skill-row">
-        <div class="skill-label"><span>Skills you entered</span><span>${skills.length}</span></div>
-        <p class="small" style="line-height:1.9">${skills.map(escapeHTML).join(" · ")}</p>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label"><span>Suggested areas to explore</span><span>${missing.length}</span></div>
-        ${missing.length ? missing.map(s=>`<div class="activity"><div class="activity-dot"></div><p>${escapeHTML(s)}</p></div>`).join("") : '<p class="small muted">Explore more advanced skills for your target role.</p>'}
-      </div>
-    </div>`;
-
-  $("statMatch").textContent = score+"%";
-  logActivity(`Generated a sample analysis for ${role}`);
-  renderDashboard();
-  toast("Sample resume analysis generated.");
-}
-
-function generateCareerTool() {
-  const role = $("studioRole").value.trim() || "your target role";
-  const company = $("studioCompany").value.trim() || "the organization";
-  const skills = $("studioSkills").value.trim() || "programming fundamentals, learning mindset, and project experience";
-  const tool = $("studioTool").value;
-
-  if(tool==="cover") {
-    careerText = `COVER LETTER DRAFT
-
-Dear Hiring Team at ${company},
-
-I am writing to express my interest in the ${role} opportunity.
-
-My background includes ${skills}. I am eager to apply my existing knowledge, strengthen my technical abilities, and contribute to meaningful projects while learning from experienced professionals.
-
-I value continuous learning, collaboration, and thoughtful problem-solving. I would welcome the opportunity to discuss how my interests and skills align with your team's needs.
-
-Thank you for considering my application.
-
-Sincerely,
-[Your Name]
-
-Before sending: add your actual achievements, relevant projects, and the specific requirements from the real job description.`;
-  } else if(tool==="interview") {
-    careerText = `INTERVIEW PREPARATION
-Target role: ${role}
-
-1. Tell me about yourself and why you are interested in this role.
-2. Explain a project you have worked on and your personal contribution.
-3. Describe how you approach a problem you cannot solve immediately.
-4. What technical skills do you use most confidently?
-5. How would you learn a new tool or technology required by the team?
-6. Describe a bug or challenge you encountered and how you addressed it.
-7. Why do you want to join ${company}?
-
-PRACTICE TASK
-Prepare a 60-second introduction, review your project code, and practise explaining your decisions clearly.
-
-Use real examples from your own experience when answering.`;
-  } else {
-    careerText = `SKILL DEVELOPMENT PLAN
-Target role: ${role}
-
-Your current skills:
-${skills}
-
-Suggested next steps:
-
-1. Review a real job description and list its required skills.
-2. Identify requirements you have not practised yet.
-3. Build one small project that demonstrates a missing technical skill.
-4. Learn Git and GitHub for version control and project presentation.
-5. Practise explaining your project, decisions, and challenges.
-6. Revisit your progress and update your resume with genuine achievements.
-
-Treat these as suggestions. Compare them against the actual requirements for ${company} and your current experience.`;
-  }
-
-  $("careerOutput").className = "modal-content";
-  $("careerOutput").textContent = careerText;
-  $("copyBtn").style.display = "block";
-  logActivity(`Generated ${$("studioTool").selectedOptions[0].text}`);
-  toast("Career guidance draft generated.");
-}
-
-async function copyCareerOutput() {
-  try {
-    await navigator.clipboard.writeText(careerText);
-    toast("Text copied.");
-  } catch {
-    showModal("Copy your draft",careerText);
-    toast("Select and copy the text from the dialog.");
-  }
-}
-
-// Initial rendering
-renderDashboard();
-renderJobs();
-renderApplications();
+updateDate();
+setAuthMode("login");
 </script>
+
 </body>
 </html>
